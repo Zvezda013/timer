@@ -1,32 +1,32 @@
-let start = document.getElementById('start');
-
-
-start.addEventListener('click',getTimeRemaning);
+var start = document.getElementById('start');
+    styleDays = document.querySelector('.days'),
+    styleHours = document.querySelector('.hours'),
+    styleMinutes = document.querySelector('.minutes'),
+    styleSeconds = document.querySelector('.seconds');
+mas = { 
+        'lastClin': null,       
+    };
+start.addEventListener('click',function(){
+        mas.lastClin = parseInt(Date.parse(new Date()));
+        setInterval(getTimeRemaning, 1000);
+        //getTimeRemaning();
+});
+ 
 
 function getTimeRemaning(){
-    let dateNow = new Date(),
-        mill = Date.parse(dateNow),
-        minutes = Math.floor((mill/1000/60)%60),
-        hours = Math.floor((mill/(1000*60*60)));
-    console.log(mill);
-
-    return{
-        'total': mill,
-        'hours': hours,
-        'minutes': minutes
-    }
-}   
-
-setInterval(getTimeRemaning,1000);
-/*function setClock(id){
-    let timer = document.getElementById(id),
-        minutes = timer.querySelector('.minutes'),
-        hours = timer.querySelector('.hourse');
-        timeInterval = setInterval(updateClock,1000);
+    var timeNow = parseInt(Date.parse(new Date())-mas.lastClin),
+        days = Math.floor((timeNow)/(1000*60*60*24)),
+        hours = Math.floor((((timeNow)/1000/60/60)%24)),
+        minutes = Math.floor(((timeNow/1000/60)%60));
+        seconds = Math.floor(((timeNow/1000)%60));
         
-    function updateClock(){
-        let t = getTimeRemaning()
-    }
-    }
-    setClock('timer')
-*/
+    styleDays.textContent = days;
+    styleHours.textContent = hours;
+    styleMinutes.textContent = minutes;
+    styleSeconds.textContent = seconds;
+    console.log(timeNow);
+}
+
+function animation(){
+    
+}
